@@ -14,8 +14,6 @@ import {
   Tr,
   Th,
   Td,
-  Flex,
-  Box,
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
