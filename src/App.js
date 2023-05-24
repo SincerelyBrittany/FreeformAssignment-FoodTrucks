@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Data from "./data/Mobile_Food_Facility_Permit.csv";
 import Papa from "papaparse";
-import { Container } from "@chakra-ui/react";
+import {
+  Container,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  Flex,
+  Box,
+  HStack,
+  TableCaption,
+  TableContainer,
+} from "@chakra-ui/react";
 
 function App() {
   const [isDataLoading, setDataLoading] = React.useState(false);
@@ -28,32 +42,59 @@ function App() {
 
   console.log(data);
   return (
-    <Container maxW="2xl" bg="blue.600" centerContent>
-      <div className="App">
-        {isDataLoading ? (
-          <h1> loading </h1>
-        ) : (
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Applicant</th>
-                <th>FacilityType</th>
-                <th>LocationDescription</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((row, index) => (
-                <tr key={index}>
-                  <td>{row.Applicant}</td>
-                  <td>{row.FacilityType}</td>
-                  <td>{row.LocationDescription}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
-    </Container>
+    <div className="App">
+      {isDataLoading ? (
+        <h1> loading </h1>
+      ) : (
+        <Container maxW="1xl" bg="blue.600" centerContent>
+          <h1> Showing {data.length} Food Trucks in database.</h1>
+          <TableContainer>
+            <Table variant="simple" overflow="scroll" size="sm" maxWidth="1">
+              <Thead>
+                <Tr
+                  style={{
+                    height: "30px",
+                  }}
+                >
+                  <Th>Name</Th>
+                  <Th>Address</Th>
+                  <Th>FoodItems</Th>
+                  <Th>Location</Th>
+                  <Th>Schedule</Th>
+                  <Th>dayshours</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {data.length !== 0 &&
+                  data.map((row, index) => (
+                    <Tr>
+                      <Td overflow="scroll" size="md" maxWidth="300px">
+                        {row.Applicant}
+                      </Td>
+                      <Td overflow="scroll" size="md" maxWidth="300px">
+                        {row.Address}
+                      </Td>
+                      <Td overflow="scroll" size="md" maxWidth="300px">
+                        {row.FoodItems}
+                      </Td>
+                      <Td overflow="scroll" size="md" maxWidth="300px">
+                        {row.Location}
+                      </Td>
+                      <Td overflow="scroll" size="md" maxWidth="300px">
+                        {row.Schedule}
+                      </Td>
+                      <Td overflow="scroll" size="md" maxWidth="300px">
+                        {row.dayshours}
+                      </Td>
+                    </Tr>
+                  ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Container>
+        // </Flex>
+      )}
+    </div>
   );
 }
 
