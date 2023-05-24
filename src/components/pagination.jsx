@@ -14,11 +14,10 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
   const pages = _.range(1, pagesCount + 1);
 
   return (
-    <Stack direction={["row", "row"]} spacing="14px" centerContent>
+    <Stack direction={["row", "row"]} spacing="14px">
       {pages.map((page) => {
         return (
           <Box
-            centerContent
             w="20px"
             h="20px"
             // bg="grey"

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Data from "./data/Mobile_Food_Facility_Permit.csv";
 import Papa from "papaparse";
+import _ from "lodash";
 import { paginate } from "./utils/paginate";
 import Pagination from "./components/pagination";
+import SearchBox from "./components/searchBox";
 
 import {
   Container,
@@ -23,6 +25,7 @@ function App() {
   const [data, setData] = useState([]);
   const [pageSize, setPageSize] = React.useState(23);
   const [currentPage, setcurrentPage] = React.useState(1);
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   const fetchData = async () => {
     const response = await fetch(Data);
@@ -47,11 +50,39 @@ function App() {
     setcurrentPage(pageNum);
   };
 
-  const filtered = data;
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    setcurrentPage(1);
+  };
+  const Search = (searchTerm, limit = 10) => {
+    let results = [];
+    _.map(data, function filterItem(n) {
+      if (n.Applicant.toLowerCase().startsWith(searchTerm.toLowerCase())) {
+        results.push(n);
+      }
+    });
+    return results;
+  };
+
+  const getPagedData = () => {
+    let filtered;
+    if (searchQuery) {
+      filtered = Search(searchQuery);
+    } else {
+      filtered = data;
+    }
+
+    const paginatedData = paginate(filtered, currentPage, pageSize);
+
+    return {
+      totalCount: filtered.length,
+      paginatedTrucks: paginatedData,
+    };
+  };
 
   if (data && data.length === 0) return <p> There are no data </p>;
 
-  const paginatedTrucks = paginate(data, currentPage, pageSize);
+  const { totalCount, paginatedTrucks } = getPagedData();
 
   return (
     <div className="App">
@@ -59,12 +90,13 @@ function App() {
         <h1> loading </h1>
       ) : (
         <Container maxW="2xl" bg="blue.600" centerContent>
-          <h1> Showing {data.length} Food Trucks in database.</h1>
+          <h1> Showing {totalCount} Food Trucks in database.</h1>
+          <SearchBox value={searchQuery} onChange={handleSearch} />
           <TableContainer>
             <Table variant="simple" overflow="scroll" size="sm" maxWidth="10">
               <TableCaption>
                 <Pagination
-                  itemsCount={filtered.length}
+                  itemsCount={data.length}
                   pageSize={pageSize}
                   onPageChange={handlePageChange}
                   currentPage={currentPage}
@@ -87,7 +119,7 @@ function App() {
               <Tbody>
                 {paginatedTrucks.length !== 0 &&
                   paginatedTrucks.map((row, index) => (
-                    <Tr>
+                    <Tr key={index}>
                       <Td overflow="scroll" size="md" maxWidth="300px">
                         {row.Applicant}
                       </Td>
