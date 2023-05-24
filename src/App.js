@@ -5,18 +5,9 @@ import _ from "lodash";
 import { paginate } from "./utils/paginate";
 import Pagination from "./components/pagination";
 import SearchBox from "./components/searchBox";
+import FoodTruckTable from "./components/foodTruckTable";
 
-import {
-  Container,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 
 function App() {
   const [isDataLoading, setDataLoading] = React.useState(false);
@@ -74,13 +65,13 @@ function App() {
 
     return {
       totalCount: filtered.length,
-      paginatedTrucks: paginatedData,
+      paginatedData: paginatedData,
     };
   };
 
   if (data && data.length === 0) return <p> There are no data </p>;
 
-  const { totalCount, paginatedTrucks } = getPagedData();
+  const { totalCount, paginatedData } = getPagedData();
 
   return (
     <div className="App">
@@ -90,57 +81,13 @@ function App() {
         <Container maxW="2xl" bg="blue.600" centerContent>
           <h1> Showing {totalCount} Food Trucks in database.</h1>
           <SearchBox value={searchQuery} onChange={handleSearch} />
-          <TableContainer>
-            <Table variant="simple" overflow="scroll" size="sm" maxWidth="10">
-              <TableCaption>
-                <Pagination
-                  itemsCount={data.length}
-                  pageSize={pageSize}
-                  onPageChange={handlePageChange}
-                  currentPage={currentPage}
-                />
-              </TableCaption>
-              <Thead>
-                <Tr
-                  style={{
-                    height: "30px",
-                  }}
-                >
-                  <Th>Name</Th>
-                  <Th>Address</Th>
-                  <Th>FoodItems</Th>
-                  <Th>Location</Th>
-                  <Th>Schedule</Th>
-                  <Th>dayshours</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {paginatedTrucks.length !== 0 &&
-                  paginatedTrucks.map((row, index) => (
-                    <Tr key={index}>
-                      <Td overflow="scroll" size="md" maxWidth="300px">
-                        {row.Applicant}
-                      </Td>
-                      <Td overflow="scroll" size="md" maxWidth="300px">
-                        {row.Address}
-                      </Td>
-                      <Td overflow="scroll" size="md" maxWidth="300px">
-                        {row.FoodItems}
-                      </Td>
-                      <Td overflow="scroll" size="md" maxWidth="300px">
-                        {row.Location}
-                      </Td>
-                      <Td overflow="scroll" size="md" maxWidth="300px">
-                        {row.Schedule}
-                      </Td>
-                      <Td overflow="scroll" size="md" maxWidth="300px">
-                        {row.dayshours}
-                      </Td>
-                    </Tr>
-                  ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
+          <FoodTruckTable paginatedTrucks={paginatedData} />
+          <Pagination
+            itemsCount={totalCount}
+            pageSize={pageSize}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
         </Container>
       )}
     </div>
