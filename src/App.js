@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Data from "./data/Mobile_Food_Facility_Permit.csv";
 import Papa from "papaparse";
+import { paginate } from "./utils/paginate";
+import Pagination from "./components/pagination";
+
 import {
   Container,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
   Flex,
   Box,
-  HStack,
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
@@ -20,6 +21,8 @@ import {
 function App() {
   const [isDataLoading, setDataLoading] = React.useState(false);
   const [data, setData] = useState([]);
+  const [pageSize, setPageSize] = React.useState(23);
+  const [currentPage, setcurrentPage] = React.useState(1);
 
   const fetchData = async () => {
     const response = await fetch(Data);
@@ -40,16 +43,33 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(data);
+  const handlePageChange = (pageNum) => {
+    setcurrentPage(pageNum);
+  };
+
+  const filtered = data;
+
+  if (data && data.length === 0) return <p> There are no data </p>;
+
+  const paginatedTrucks = paginate(data, currentPage, pageSize);
+
   return (
     <div className="App">
       {isDataLoading ? (
         <h1> loading </h1>
       ) : (
-        <Container maxW="1xl" bg="blue.600" centerContent>
+        <Container maxW="2xl" bg="blue.600" centerContent>
           <h1> Showing {data.length} Food Trucks in database.</h1>
           <TableContainer>
-            <Table variant="simple" overflow="scroll" size="sm" maxWidth="1">
+            <Table variant="simple" overflow="scroll" size="sm" maxWidth="10">
+              <TableCaption>
+                <Pagination
+                  itemsCount={filtered.length}
+                  pageSize={pageSize}
+                  onPageChange={handlePageChange}
+                  currentPage={currentPage}
+                />
+              </TableCaption>
               <Thead>
                 <Tr
                   style={{
@@ -65,8 +85,8 @@ function App() {
                 </Tr>
               </Thead>
               <Tbody>
-                {data.length !== 0 &&
-                  data.map((row, index) => (
+                {paginatedTrucks.length !== 0 &&
+                  paginatedTrucks.map((row, index) => (
                     <Tr>
                       <Td overflow="scroll" size="md" maxWidth="300px">
                         {row.Applicant}
@@ -92,7 +112,6 @@ function App() {
             </Table>
           </TableContainer>
         </Container>
-        // </Flex>
       )}
     </div>
   );
