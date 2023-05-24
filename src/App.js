@@ -3,8 +3,8 @@ import Data from "./data/Mobile_Food_Facility_Permit.csv";
 import Papa from "papaparse";
 import _ from "lodash";
 import { paginate } from "./utils/paginate";
-import Pagination from "./components/pagination";
-import SearchBox from "./components/searchBox";
+import Pagination from "./components/GlobalComponents/pagination";
+import SearchBox from "./components/GlobalComponents/searchBox";
 import FoodTruckTable from "./components/foodTruckTable";
 
 import { Container } from "@chakra-ui/react";
