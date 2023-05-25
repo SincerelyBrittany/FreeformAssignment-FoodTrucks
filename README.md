@@ -71,8 +71,6 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
@@ -88,7 +86,7 @@
 
 In the project directory, you can run:
 
-``npm start``
+`npm start`
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in your browser.
 
@@ -99,23 +97,21 @@ You may also see any lint errors in the console.
 
 [Node, NPM, (or Yarn, alternatively)](https://nodejs.org/en)
 
-
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+3. Get a free API Key at Google MAPS [Google API](https://console.cloud.google.com/google/maps-apis/overview) and add it to your .env fiile
    ```js
-   const API_KEY = "ENTER YOUR API";
+   REACT_APP_GOOGLE_MAPS_API_KEY = "ENTER YOUR API";
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -137,9 +133,13 @@ _For more examples, please refer to the [Documentation](https://example.com)_ --
 ## Roadmap
 
 - [x] Search Box/Filter through Applicant Names
-- [] Pagination
-- [] Use Google Maps to Search for nearby food trucks
+- [x] Pagination
+- [x] Use Google Maps to Search for nearby food trucks
 - [] Host on Google Pages
+- [] Remove duplicates - One Name, multiple locations
+- [] Create a way for users toSearch by Name of place \*\*
+- [] Create a way for users to Search by type of food
+- [] Create a way for users to Search by location/nearby?
 - [] Create a way for users to sort by name (asc, desc)
 - [] Update CSS to make it responsive and more user friendly.
 - [] Create a backend using nodejs, posgressql, and express.
