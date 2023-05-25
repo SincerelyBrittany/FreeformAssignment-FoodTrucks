@@ -69,6 +69,8 @@
 
 ## About The Project
 
+You can read more about this project and my experience building it by visiting my [blog page](https://hashnode.com/preview/646b9d4674444a000fa8b9b4). 
+
 
 ![Screenshot 2023-05-25 at 8 51 29 AM](https://github.com/SincerelyBrittany/FreeformAssignment-FoodTrucks/assets/24905013/fc75b9d5-bf92-426a-b502-a1360b807864)
 
