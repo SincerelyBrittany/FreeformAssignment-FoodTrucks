@@ -7,6 +7,8 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 
+import { useParams } from "react-router-dom";
+
 import {
   Box,
   Button,
@@ -34,10 +36,30 @@ const customMarker = {
   scale: 1,
 };
 
-const center = { lat: 48.8584, lng: 2.2945 };
+// { lat: 48.8584, lng: 2.2945 };
 
-function Map(props) {
-  console.log(props, "this is the propsssss girllll");
+function Map() {
+  // console.log(typeof location, "this is the propsssss girllll");
+  // let streetaddress = location.split(",")[1];
+  // console.log(streetaddress.replace(/[()]/g, ""), "this is street");
+  const { location } = useParams();
+  let lat = location.split(",")[0].replace(/[()]/g, "");
+  let lng = location.split(",")[1].replace(/[()]/g, "");
+  console.log(typeof parseFloat(lat));
+  const center = { lat: lat, lng: lng };
+  // const center = () => {
+  //   let lat;
+  //   let lng;
+
+  //   if (location) {
+  //     lat = parseInt(location.split(",")[0]);
+  //     lng = parseInt(location.split(",")[1]);
+  //     console.log(lat, lng);
+  //     // return { lat, lng };
+  //   }
+  //   return { lat: 48.8584, lng: 2.2945 };
+  // };
+
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
 
   const { isLoaded } = useJsApiLoader({
