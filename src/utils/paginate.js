@@ -14,9 +14,3 @@ export function paginate(items, currentPage, pageSize) {
       .value()
   );
 }
-
-// It basically reads "For the given items, extract pageSize number of elements starting from startIndex"
-
-// .slice with one argument returns an array from the given index to the end.
-// .take extracts the given number of elements from the array.
-// .value() returns the output of applying preceding operation.
