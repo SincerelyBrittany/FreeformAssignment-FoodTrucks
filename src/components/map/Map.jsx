@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState } from "react";
+import React, { useRef, useMemo, useState, useEffect } from "react";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -42,11 +42,7 @@ function Map() {
   // console.log(typeof location, "this is the propsssss girllll");
   // let streetaddress = location.split(",")[1];
   // console.log(streetaddress.replace(/[()]/g, ""), "this is street");
-  const { location } = useParams();
-  let lat = location.split(",")[0].replace(/[()]/g, "");
-  let lng = location.split(",")[1].replace(/[()]/g, "");
-  console.log(typeof parseFloat(lat));
-  const center = { lat: lat, lng: lng };
+
   // const center = () => {
   //   let lat;
   //   let lng;
@@ -61,6 +57,24 @@ function Map() {
   // };
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
+  const [center, setCenter] = useState({} || null);
+
+  const { location } = useParams();
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    if (location) {
+      let lat = parseFloat(location.split(",")[0].replace(/[()]/g, ""));
+      let lng = parseFloat(location.split(",")[1].replace(/[()]/g, ""));
+      console.log({ lat: lat, lng: lng });
+      setCenter({ lat: lat, lng: lng });
+    }
+  }, []);
+
+  // let latOne = location.split(",")[0].replace(/[()]/g, "");
+  // let lngOne = location.split(",")[1].replace(/[()]/g, "");
+  // console.log(typeof parseFloat(latOne));
+  // const center = { lat: latOne, lng: lngOne };
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
