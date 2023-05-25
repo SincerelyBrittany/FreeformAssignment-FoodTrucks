@@ -1,15 +1,12 @@
 import React from "react";
 import _ from "lodash";
 import {
-  Container,
-  Table,
-  Thead,
+
   Tbody,
   Tr,
-  Th,
+
   Td,
-  TableCaption,
-  TableContainer,
+
 } from "@chakra-ui/react";
 
 const TableBody = ({ data, columns }) => {
