@@ -7,7 +7,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 import {
   Box,
@@ -36,30 +36,27 @@ const customMarker = {
   scale: 1,
 };
 
-// { lat: 48.8584, lng: 2.2945 };
+const image =
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+
+// https://developers.google.com/maps/documentation/javascript/examples/full/images/parking_lot_maps.png
 
 function Map() {
-  // console.log(typeof location, "this is the propsssss girllll");
-  // let streetaddress = location.split(",")[1];
-  // console.log(streetaddress.replace(/[()]/g, ""), "this is street");
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries: ["places"],
+  });
 
-  // const center = () => {
-  //   let lat;
-  //   let lng;
-
-  //   if (location) {
-  //     lat = parseInt(location.split(",")[0]);
-  //     lng = parseInt(location.split(",")[1]);
-  //     console.log(lat, lng);
-  //     // return { lat, lng };
-  //   }
-  //   return { lat: 48.8584, lng: 2.2945 };
-  // };
-
+  const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [distance, setDistance] = useState("");
+  const [duration, setDuration] = useState("");
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
   const [center, setCenter] = useState({} || null);
 
   const { location } = useParams();
+  const addy = useLocation();
+  const from = addy?.state?.from;
+  console.log(from, "this is the address");
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -70,20 +67,6 @@ function Map() {
       setCenter({ lat: lat, lng: lng });
     }
   }, []);
-
-  // let latOne = location.split(",")[0].replace(/[()]/g, "");
-  // let lngOne = location.split(",")[1].replace(/[()]/g, "");
-  // console.log(typeof parseFloat(latOne));
-  // const center = { lat: latOne, lng: lngOne };
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries: ["places"],
-  });
-
-  const [directionsResponse, setDirectionsResponse] = useState(null);
-  const [distance, setDistance] = useState("");
-  const [duration, setDuration] = useState("");
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef();
@@ -100,6 +83,7 @@ function Map() {
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
+    console.log(destiantionRef.current.value, "this is the value");
     const results = await directionsService.route({
       origin: originRef.current.value,
       destination: destiantionRef.current.value,
@@ -110,6 +94,19 @@ function Map() {
     setDistance(results.routes[0].legs[0].distance.text);
     setDuration(results.routes[0].legs[0].duration.text);
   }
+
+  // async function updateDestination() {
+  //   const directionsService = new google.maps.DirectionsService();
+  //   if (location) {
+  //     const results = await directionsService.route({
+  //       origin: originRef.current.value,
+  //       destination: center,
+  //       // eslint-disable-next-line no-undef
+  //       travelMode: google.maps.TravelMode.DRIVING,
+  //     });
+  //   }
+  //   return null;
+  // }
 
   function clearRoute() {
     setDirectionsResponse(null);
@@ -141,7 +138,7 @@ function Map() {
           }}
           onLoad={(map) => setMap(map)}
         >
-          <MarkerF position={center} icon={customMarker} />
+          <MarkerF position={center} icon={image} />
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
@@ -156,6 +153,7 @@ function Map() {
         minW="container.md"
         zIndex="1"
       >
+        <h2> {from ? from : null} </h2>
         <HStack spacing={2} justifyContent="space-between">
           <Box flexGrow={1}>
             <Autocomplete>

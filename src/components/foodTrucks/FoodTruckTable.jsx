@@ -12,14 +12,18 @@ class FoodTruckTable extends Component {
       label: "Name",
     },
     { path: "FoodItems", label: "FoodItems" },
-    { path: "Address", label: "Address" },
     { path: "FacilityType", label: "Type" },
     {
       path: "Location",
       label: "Location",
       content: (location) => (
         // <div>{location.Location}</div>,
-        <Link to={`/map/${location.Location}`}>{location.Location}</Link>
+        <Link
+          to={`/map/${location.Location}`}
+          state={{ from: location.Address }}
+        >
+          {location.Address}
+        </Link>
       ),
     },
   ];
