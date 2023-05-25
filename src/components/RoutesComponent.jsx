@@ -7,6 +7,7 @@ const RoutesComponent = () => (
   <Routes>
     <Route path="/" element={<FoodTrucks />}></Route>
     <Route path="/map/:location" element={<Map />}></Route>
+    {/* <Route path="/map/:location" element={<Map />}></Route> */}
   </Routes>
 );
 
