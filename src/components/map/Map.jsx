@@ -56,14 +56,12 @@ function Map() {
   const { location } = useParams();
   const addy = useLocation();
   const from = addy?.state?.from;
-  console.log(from, "this is the address");
 
   useEffect(() => {
     // Update the document title using the browser API
     if (location) {
       let lat = parseFloat(location.split(",")[0].replace(/[()]/g, ""));
       let lng = parseFloat(location.split(",")[1].replace(/[()]/g, ""));
-      console.log({ lat: lat, lng: lng });
       setCenter({ lat: lat, lng: lng });
     }
   }, []);
@@ -83,7 +81,6 @@ function Map() {
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
-    console.log(destiantionRef.current.value, "this is the value");
     const results = await directionsService.route({
       origin: originRef.current.value,
       destination: destiantionRef.current.value,

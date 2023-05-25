@@ -17,7 +17,6 @@ class FoodTruckTable extends Component {
       path: "Location",
       label: "Location",
       content: (location) => (
-        // <div>{location.Location}</div>,
         <Link
           to={`/map/${location.Location}`}
           state={{ from: location.Address }}
@@ -29,7 +28,6 @@ class FoodTruckTable extends Component {
   ];
 
   render() {
-    console.log(this.props.paginatedTrucks[0]);
     const { paginatedTrucks } = this.props;
 
     return <TableComponent columns={this.columns} data={paginatedTrucks} />;
