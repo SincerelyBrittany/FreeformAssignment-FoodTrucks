@@ -19,9 +19,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/SincerelyBrittany/FreeformAssignment-FoodTrucks">
+<!--   <a href="https://github.com/SincerelyBrittany/FreeformAssignment-FoodTrucks">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  </a> -->
 
   <h3 align="center">Food Truck Guide </h3>
 
@@ -69,14 +69,16 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+![Screenshot 2023-05-25 at 8 51 29 AM](https://github.com/SincerelyBrittany/FreeformAssignment-FoodTrucks/assets/24905013/fc75b9d5-bf92-426a-b502-a1360b807864)
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
 - [![React][React.js]][React-url]
-- [![Papaparse][Papaparse]][Papaparse-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -120,7 +122,10 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ## Usage
 
-Youtube Video Coming Soon
+- Use to search for foodtrucks in the San Fran Area! 
+
+https://github.com/SincerelyBrittany/FreeformAssignment-FoodTrucks/assets/24905013/3c68ab56-4e22-4e68-a8ea-7795303b06e8
+
 
 <!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
