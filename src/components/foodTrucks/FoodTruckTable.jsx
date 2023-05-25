@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import TableComponent from "./Table/Table";
+import TableComponent from "../table/Table";
+import { Link } from "react-router-dom";
 
 class FoodTruckTable extends Component {
   constructor() {
@@ -16,7 +17,10 @@ class FoodTruckTable extends Component {
     {
       path: "Location",
       label: "Location",
-      content: (location) => <div>{location.Location}</div>,
+      content: (location) => (
+        // <div>{location.Location}</div>,
+        <Link to={`/map/${location.Location}`}>{location.Location}</Link>
+      ),
     },
   ];
 
