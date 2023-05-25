@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/FreeformAssignment-FoodTrucks/static/js/main.6bee076d.js",
+    "static/js/787.4ab042f6.chunk.js": "/FreeformAssignment-FoodTrucks/static/js/787.4ab042f6.chunk.js",
+    "static/media/Mobile_Food_Facility_Permit.csv": "/FreeformAssignment-FoodTrucks/static/media/Mobile_Food_Facility_Permit.0f5b885d7a8b484645d6.csv",
+    "index.html": "/FreeformAssignment-FoodTrucks/index.html",
+    "main.6bee076d.js.map": "/FreeformAssignment-FoodTrucks/static/js/main.6bee076d.js.map",
+    "787.4ab042f6.chunk.js.map": "/FreeformAssignment-FoodTrucks/static/js/787.4ab042f6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.6bee076d.js"
+  ]
+}
