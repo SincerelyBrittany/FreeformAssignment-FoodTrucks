@@ -4,7 +4,7 @@ import Papa from "papaparse";
 import _ from "lodash";
 import { paginate } from "../../utils/paginate";
 import Pagination from "../globalComponents/Pagination";
-import SearchBox from "../globalComponents/Searchbox";
+import SearchBox from "../globalComponents/SearchBox";
 import FoodTruckTable from "../foodTrucks/FoodTruckTable";
 
 import { Container } from "@chakra-ui/react";

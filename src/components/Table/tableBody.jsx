@@ -1,13 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import {
-
-  Tbody,
-  Tr,
-
-  Td,
-
-} from "@chakra-ui/react";
+import { Tbody, Tr, Td } from "@chakra-ui/react";
 
 const TableBody = ({ data, columns }) => {
   const renderCell = (item, column) => {
